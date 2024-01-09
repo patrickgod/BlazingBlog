@@ -17,8 +17,6 @@ namespace BlazingBlog.Application
                 configuration.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
             });
 
-            services.AddScoped<IArticleService, ArticleService>();
-
             return services;
         } 
     }
