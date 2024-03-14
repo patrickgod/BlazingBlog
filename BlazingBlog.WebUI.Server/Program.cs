@@ -1,4 +1,4 @@
-using BlazingBlog.WebUI.Server.Components;
+using BlazingBlog.WebUI.Server;
 using BlazingBlog.Application;
 using BlazingBlog.Infrastructure;
 
