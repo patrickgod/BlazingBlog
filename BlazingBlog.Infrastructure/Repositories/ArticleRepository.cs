@@ -17,6 +17,13 @@ namespace BlazingBlog.Infrastructure.Repositories
             _context = context;
         }
 
+        public async Task<Article> CreateArticleAsync(Article article)
+        {
+            _context.Articles.Add(article);
+            await _context.SaveChangesAsync();
+            return article;
+        }
+
         public async Task<List<Article>> GetAllArticlesAsync()
         {
             return await _context.Articles.ToListAsync();
