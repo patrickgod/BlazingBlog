@@ -5,6 +5,8 @@
 <PageTitle>Articles</PageTitle>
 <h3>Articles</h3>
 
+<a href="/article-editor" class="btn btn-primary">Create New Article</a>
+
 @if (articles.Count == 0)
 {
     <p><em>Loading...</em></p>
@@ -20,7 +22,7 @@ else
 }
 
 @code {
-    private List<Article> articles = new List<Article>();
+    private List<ArticleResponse> articles = new();
 
     protected override async Task OnInitializedAsync()
     {

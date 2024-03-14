@@ -7,11 +7,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{006B3AE2-A0D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazingBlog.WebUI.Server", "BlazingBlog.WebUI.Server\BlazingBlog.WebUI.Server.csproj", "{964DE748-AB43-41C3-911C-AE00BB5464E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazingBlog.Domain", "BlazingBlog.Domain\BlazingBlog.Domain.csproj", "{7666B391-C8B3-4253-8002-F71439C02502}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazingBlog.Domain", "BlazingBlog.Domain\BlazingBlog.Domain.csproj", "{7666B391-C8B3-4253-8002-F71439C02502}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazingBlog.Application", "BlazingBlog.Application\BlazingBlog.Application.csproj", "{EDE45997-0A75-493F-97F3-F6BCF6FC4F88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazingBlog.Application", "BlazingBlog.Application\BlazingBlog.Application.csproj", "{EDE45997-0A75-493F-97F3-F6BCF6FC4F88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazingBlog.Infrastructure", "BlazingBlog.Infrastructure\BlazingBlog.Infrastructure.csproj", "{E7D6A4E1-D5E4-4436-98F2-35C425859A45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazingBlog.Infrastructure", "BlazingBlog.Infrastructure\BlazingBlog.Infrastructure.csproj", "{E7D6A4E1-D5E4-4436-98F2-35C425859A45}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
