@@ -1,6 +1,7 @@
 ﻿@page "/article-editor"
 @page "/article-editor/{ArticleId:int}"
 @inject ISender Sender
+@inject NavigationManager NavigationManager
 
 @if (isEditMode && Article is not null)
 {
@@ -66,7 +67,8 @@ else
         {
             var command = Article.Adapt<CreateArticleCommand>();
             var result = await Sender.Send(command);
-            Article = result.Adapt<ArticleModel>();
+            NavigationManager.NavigateTo($"/article-editor/{result.Id}");
+            // Article = result.Adapt<ArticleModel>();
         }
     }
 }
