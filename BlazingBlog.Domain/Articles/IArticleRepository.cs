@@ -12,5 +12,6 @@ namespace BlazingBlog.Domain.Articles
         Task<Article?> GetArticleByIdAsync(int id);
         Task<Article> CreateArticleAsync(Article article);
         Task<Article?> UpdateArticleAsync(Article article);
+        Task<bool> DeleteArticleAsync(int id);
     }
 }
