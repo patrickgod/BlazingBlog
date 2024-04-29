@@ -3,7 +3,9 @@
 @attribute [StreamRendering]
 
 <PageTitle>Articles</PageTitle>
-<h3>Articles</h3>
+
+<div class="space-y-6">
+<h2 class="text-3xl font-extrabold text-gray-50">Articles</h2>
 
 <a href="/article-editor" class="btn btn-primary">Create New Article</a>
 
@@ -17,14 +19,31 @@ else if (articles.Count == 0)
 }
 else
 {
+    <ul class="space-y-8 xl:space-y-10">
     @foreach (var article in articles)
     {
-        <h4>@article.Title</h4>
-        <p>@article.Content</p>
-        <small>@article.DatePublished</small>
-        <a href="/article-editor/@article.Id">Edit Article</a>
+                <li>
+                    <article>
+                        <dl>
+                            <dd class="text-xs text-gray-400">
+                                <time>@article.DatePublished</time>
+                            </dd>
+                        </dl>
+                        <div class="space-y-1">
+                            <h3 class="text-2xl font-bold">
+                                <a href="#" class="text-gray-50">@article.Title</a>
+                            </h3>
+                            <p class="max-w-full prose dark:text-gray-100">@article.Content</p>
+                            <div class="flex flex-wrap space-x-3">
+                                <a href="/article-editor/@article.Id" class="text-xs text-blue-400">Edit Article</a>
+                            </div>
+                        </div>
+                    </article>
+                </li>
     }
+    </ul>
 }
+</div>
 
 @code {
     private List<ArticleResponse>? articles = new();
