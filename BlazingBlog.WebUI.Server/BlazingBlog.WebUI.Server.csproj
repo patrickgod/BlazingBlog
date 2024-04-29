@@ -17,4 +17,8 @@
     <ProjectReference Include="..\BlazingBlog.Infrastructure\BlazingBlog.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\" />
+  </ItemGroup>
+
 </Project>
