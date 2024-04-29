@@ -7,9 +7,13 @@
 
 <a href="/article-editor" class="btn btn-primary">Create New Article</a>
 
-@if (articles.Count == 0)
+@if (articles is null)
 {
-    <p><em>Loading...</em></p>
+    <p><em>Loading articles...</em></p>
+}
+else if (articles.Count == 0)
+{
+    <p><em>No article found. :(</em></p>
 }
 else
 {
@@ -23,12 +27,14 @@ else
 }
 
 @code {
-    private List<ArticleResponse> articles = new();
+    private List<ArticleResponse>? articles = new();
 
     protected override async Task OnInitializedAsync()
     {
         var result = await Sender.Send(new GetArticlesQuery());
-        if (result is not null)
+        if (result.Success)
             articles = result;
+        else
+            articles = new();
     }
 }
