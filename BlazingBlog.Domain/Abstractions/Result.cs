@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BlazingBlog.Domain.Abstractions
+﻿namespace BlazingBlog.Domain.Abstractions
 {
     public class Result
     {
@@ -27,7 +21,7 @@ namespace BlazingBlog.Domain.Abstractions
 
         public static Result<T> Ok<T>(T value) => new(value, true, string.Empty);
 
-        public static Result<T> Fail<T>(string errorMessage) 
+        public static Result<T> Fail<T>(string errorMessage)
             => new(default, false, errorMessage);
 
         public static Result<T> FromValue<T>(T? value)
