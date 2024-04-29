@@ -5,23 +5,23 @@
 <PageTitle>Articles</PageTitle>
 
 <div class="space-y-6">
-<h2 class="text-3xl font-extrabold text-gray-50">Articles</h2>
+    <h2 class="text-3xl font-extrabold text-gray-50">Articles</h2>
 
-<a href="/article-editor" class="btn btn-primary">Create New Article</a>
+    <a href="/article-editor" class="p-3 text-sm font-bold uppercase rounded bg-blue-400 text-gray-900 inline-block">Create New Article</a>
 
-@if (articles is null)
-{
-    <p><em>Loading articles...</em></p>
-}
-else if (articles.Count == 0)
-{
-    <p><em>No article found. :(</em></p>
-}
-else
-{
-    <ul class="space-y-8 xl:space-y-10">
-    @foreach (var article in articles)
+    @if (articles is null)
     {
+        <p><em>Loading articles...</em></p>
+    }
+    else if (articles.Count == 0)
+    {
+        <p><em>No article found. :(</em></p>
+    }
+    else
+    {
+        <ul class="space-y-8 xl:space-y-10">
+            @foreach (var article in articles)
+            {
                 <li>
                     <article>
                         <dl>
@@ -40,9 +40,9 @@ else
                         </div>
                     </article>
                 </li>
+            }
+        </ul>
     }
-    </ul>
-}
 </div>
 
 @code {
