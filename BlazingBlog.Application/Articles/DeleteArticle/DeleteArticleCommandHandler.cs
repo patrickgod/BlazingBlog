@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BlazingBlog.Application.Articles.DeleteArticle
 {
-    public class DeleteArticleCommandHandler : IRequestHandler<DeleteArticleCommand, bool>
+    public class DeleteArticleCommandHandler : ICommandHandler<DeleteArticleCommand>
     {
         private readonly IArticleRepository _articleRepository;
 
@@ -17,9 +17,13 @@ namespace BlazingBlog.Application.Articles.DeleteArticle
             _articleRepository = articleRepository;
         }
 
-        public async Task<bool> Handle(DeleteArticleCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(DeleteArticleCommand request, CancellationToken cancellationToken)
         {
-            return await _articleRepository.DeleteArticleAsync(request.Id);
+            var deleted = await _articleRepository.DeleteArticleAsync(request.Id);
+            if (deleted)
+                return Result.Ok();
+
+            return Result.Fail("The article does not exist.");
         }
     }
 }

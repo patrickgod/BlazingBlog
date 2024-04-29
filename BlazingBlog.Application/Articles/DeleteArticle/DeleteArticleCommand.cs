@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlazingBlog.Application.Articles.DeleteArticle
 {
-    public class DeleteArticleCommand : IRequest<bool>
+    public class DeleteArticleCommand : ICommand
     {
         public int Id { get; set; }
     }

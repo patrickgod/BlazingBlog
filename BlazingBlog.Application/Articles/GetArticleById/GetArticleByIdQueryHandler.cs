@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BlazingBlog.Application.Articles.GetArticleById
 {
-    internal class GetArticleByIdQueryHandler : IRequestHandler<GetArticleByIdQuery, ArticleResponse?>
+    internal class GetArticleByIdQueryHandler : IQueryHandler<GetArticleByIdQuery, ArticleResponse?>
     {
         private readonly IArticleRepository _articleRepository;
 
@@ -19,11 +19,11 @@ namespace BlazingBlog.Application.Articles.GetArticleById
             _articleRepository = articleRepository;
         }
 
-        public async Task<ArticleResponse?> Handle(GetArticleByIdQuery request, CancellationToken cancellationToken)
+        public async Task<Result<ArticleResponse?>> Handle(GetArticleByIdQuery request, CancellationToken cancellationToken)
         {
             var result = await _articleRepository.GetArticleByIdAsync(request.Id);
             if (result is null)
-                return null;
+                return Result.Fail<ArticleResponse?>("The article does not exist.");
 
             return result.Adapt<ArticleResponse>();
         }
