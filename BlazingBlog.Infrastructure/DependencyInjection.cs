@@ -2,6 +2,7 @@
 using BlazingBlog.Domain.Articles;
 using BlazingBlog.Infrastructure.Authentication;
 using BlazingBlog.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server;
 using Microsoft.AspNetCore.Identity;
@@ -29,6 +30,8 @@ namespace BlazingBlog.Infrastructure
 
         private static void AddAuthentication(IServiceCollection services)
         {
+            services.AddSingleton<IAuthorizationMiddlewareResultHandler, AuthorizationMiddlewareResultHandler>();
+
             services.AddScoped<IAuthenticationService, AuthenticationService>();
 
             services.AddScoped<AuthenticationStateProvider, ServerAuthenticationStateProvider>();

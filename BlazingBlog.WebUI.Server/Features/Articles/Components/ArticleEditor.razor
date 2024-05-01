@@ -1,8 +1,10 @@
 ﻿@page "/article-editor"
 @page "/article-editor/{ArticleId:int}"
 @using BlazingBlog.Application.Articles.DeleteArticle
+@using Microsoft.AspNetCore.Authorization
 @inject ISender Sender
 @inject NavigationManager NavigationManager
+@attribute [Authorize]
 
 @if (isEditMode && Article is not null)
 {
@@ -58,6 +60,7 @@ else
     ArticleModel? Article { get; set; }
     [Parameter]
     public int? ArticleId { get; set; }
+
 
     protected override async Task OnParametersSetAsync()
     {
