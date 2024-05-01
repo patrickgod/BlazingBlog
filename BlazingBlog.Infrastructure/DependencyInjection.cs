@@ -1,5 +1,6 @@
 ﻿using BlazingBlog.Application.Authentication;
 using BlazingBlog.Domain.Articles;
+using BlazingBlog.Domain.Users;
 using BlazingBlog.Infrastructure.Authentication;
 using BlazingBlog.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authorization;
@@ -24,6 +25,7 @@ namespace BlazingBlog.Infrastructure
             AddAuthentication(services);
 
             services.AddScoped<IArticleRepository, ArticleRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             return services;
         }

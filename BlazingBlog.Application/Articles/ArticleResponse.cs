@@ -5,7 +5,8 @@
             string Title,
             string? Content,
             DateTime DatePublished,
-            bool IsPublished
+            bool IsPublished,
+            string UserName
         )
     {
     }
