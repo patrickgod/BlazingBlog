@@ -6,8 +6,8 @@
 @using Microsoft.AspNetCore.Identity
 @inject ISender Sender
 @inject NavigationManager NavigationManager
-@inject UserManager<User> UserManager 
-@attribute [Authorize]
+@inject UserManager<User> UserManager
+@attribute [Authorize(Roles = "Admin, Writer")]
 
 @if (isEditMode && Article is not null)
 {
@@ -105,7 +105,7 @@ else
             var command = Article.Adapt<CreateArticleCommand>();
             command.UserId = UserManager.GetUserId(HttpContext.User);
             var result = await Sender.Send(command);
-            if(result.Success)
+            if (result.Success)
                 NavigationManager.NavigateTo($"/article-editor/{result.Value.Id}");
             else
                 SetErrorMessage(result.Error);
