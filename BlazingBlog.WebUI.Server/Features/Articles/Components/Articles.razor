@@ -37,7 +37,7 @@
                                 <a href="/articles/@article.Id" class="text-gray-50">@article.Title</a>
                             </h3>
                             <p class="max-w-full prose text-gray-100">@article.Content</p>
-                            <AuthorizeView>
+                            <AuthorizeView Roles="Admin, Writer">
                                 <div class="flex flex-wrap space-x-3">
                                     <a href="/article-editor/@article.Id" class="text-xs text-blue-400">Edit Article</a>
                                 </div>
