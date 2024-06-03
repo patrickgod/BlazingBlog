@@ -1,4 +1,5 @@
 ﻿using BlazingBlog.Application.Authentication;
+using BlazingBlog.Infrastructure.Users;
 using Microsoft.AspNetCore.Identity;
 
 namespace BlazingBlog.Infrastructure.Authentication

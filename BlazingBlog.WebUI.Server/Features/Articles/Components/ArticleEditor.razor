@@ -1,9 +1,9 @@
 ﻿@page "/article-editor"
 @page "/article-editor/{ArticleId:int}"
-@using BlazingBlog.Application.Articles.DeleteArticle
-@using BlazingBlog.Infrastructure.Authentication
-@using Microsoft.AspNetCore.Authorization
-@using Microsoft.AspNetCore.Identity
+@    using BlazingBlog.Application.Articles.DeleteArticle
+@    using BlazingBlog.Infrastructure.Authentication
+@    using Microsoft.AspNetCore.Authorization
+@    using Microsoft.AspNetCore.Identity
 @inject ISender Sender
 @inject NavigationManager NavigationManager
 @inject UserManager<User> UserManager
