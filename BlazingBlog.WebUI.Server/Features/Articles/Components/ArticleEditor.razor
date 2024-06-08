@@ -7,7 +7,12 @@
 @if (isEditMode && Article is not null)
 {
     <PageTitle>Edit Article "@Article.Title"</PageTitle>
-    <h2 class="text-3xl font-extrabold text-gray-50">Edit Article "@Article.Title" by @Article.UserName</h2>
+    <h2 class="text-3xl font-extrabold text-gray-50">Edit Article "@Article.Title"</h2>
+}
+else if(!string.IsNullOrEmpty(errorMessage))
+{
+    <PageTitle>Error</PageTitle>
+    <h2 class="text-3xl font-extrabold text-gray-50">Error</h2>
 }
 else
 {
@@ -67,7 +72,7 @@ else
         if (ArticleId is not null)
         {
             var result = await Sender.Send(
-                new GetArticleByIdQuery { Id = (int)ArticleId });
+                new GetArticleByIdForEditingQuery { Id = (int)ArticleId });
             if (result.Success)
             {
                 Article ??= result.Value.Adapt<ArticleModel>();
