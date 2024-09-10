@@ -10,6 +10,9 @@
                         <span class="p-1">Hey @context.User.Identity?.Name!</span>
                     </AuthorizeView>
                     <a href="/" class="p-1">Articles</a>
+                    <AuthorizeView Roles="Admin">
+                        <a href="/user-overview" class="p-1">User Overview</a>
+                    </AuthorizeView>
                     <AuthorizeView>
                         <Authorized>
                             <a href="/logout" class="p-1">Logout</a>
