@@ -1,6 +1,7 @@
 ﻿using BlazingBlog.Domain.Users;
 using BlazingBlog.Infrastructure.Users;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlazingBlog.Infrastructure.Repositories
 {
@@ -11,6 +12,12 @@ namespace BlazingBlog.Infrastructure.Repositories
         public UserRepository(UserManager<User> userManager)
         {
             _userManager = userManager;
+        }
+
+        public async Task<List<IUser>> GetAllUsersAsync()
+        {
+            return await _userManager.Users
+                .Select(user => (IUser)user).ToListAsync();
         }
 
         public async Task<IUser?> GetUserByIdAsync(string userId)
