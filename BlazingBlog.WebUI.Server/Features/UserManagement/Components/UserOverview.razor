@@ -7,17 +7,26 @@
 
 <h2 class="text-3xl font-extrabold text-gray-50">User Overview</h2>
 
-<ul>
-    @foreach (var user in users)
-    {
-        <li>
-            <span>@user.UserName</span><br />
-        </li>
-    }
-</ul>
+@if (users is null)
+{
+    <span>Loading users...</span>
+}
+else if (users.Count <= 0)
+{
+    <span>There are no users to see.</span>
+}
+else
+{
+    <QuickGrid Items="users.AsQueryable()">
+        <PropertyColumn Property="@(u => u.UserName)"
+                        Sortable="true" Title="Name"></PropertyColumn>
+        <PropertyColumn Property="@(u => u.Email)"
+                        Sortable="true"></PropertyColumn>
+    </QuickGrid>
+}
 
 @code {
-    private List<UserResponse>? users = new();
+    private List<UserResponse>? users = null;
 
     protected override async Task OnInitializedAsync()
     {
