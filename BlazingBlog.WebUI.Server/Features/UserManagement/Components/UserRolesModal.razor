@@ -1,4 +1,6 @@
-﻿@if (ShowModal)
+﻿@inject ISender Sender
+
+@if (ShowModal)
 {
     <div class="fixed inset-0 m-0 flex items-center justify-center bg-white bg-opacity-50">
         <div class="flex flex-col max-w-md gap-2 p-6 rounded-md shadow-md bg-gray-900 text-gray-100">
@@ -47,10 +49,7 @@
         Console.WriteLine("Modal is here!");
         Console.WriteLine($"{UserName} // {UserId}");
 
-        if (ShowModal)
-        {
-            Roles = new List<string> { "Test" };
-        }
+        await LoadUserRoles();
     }
 
     private async Task AddRole()
@@ -71,5 +70,13 @@
     {
         ShowModal = false;
         ModalClosed.InvokeAsync(ShowModal);
+    }
+
+    private async Task LoadUserRoles()
+    {
+        if (ShowModal && UserId is not null)
+        {
+            Roles = (await Sender.Send(new GetUserRolesQuery { UserId = UserId })).Value ?? [];
+        }
     }
 }
