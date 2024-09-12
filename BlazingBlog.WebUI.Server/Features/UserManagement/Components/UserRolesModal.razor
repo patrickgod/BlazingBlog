@@ -1,0 +1,75 @@
+﻿@if (ShowModal)
+{
+    <div class="fixed inset-0 m-0 flex items-center justify-center bg-white bg-opacity-50">
+        <div class="flex flex-col max-w-md gap-2 p-6 rounded-md shadow-md bg-gray-900 text-gray-100">
+            <h2 class="flex items-center gap-2 text-xl font-semibold leadi tracki">
+                Change Roles for @UserName
+            </h2>
+            <p class="flex-1 text-gray-400">
+                <QuickGrid Items="Roles.AsQueryable()">
+                    <PropertyColumn Property="@(r => r)"></PropertyColumn>
+                    <TemplateColumn>
+                        <button @onclick="() => RemoveRole(context)"
+                                class="p-2 text-sm">
+                            ❌
+                        </button>
+                    </TemplateColumn>
+                </QuickGrid>
+            </p>
+            <div class="mt-2">
+                <input @bind="newRole" class="p-2 mr-2 rounded" placeholder="Add new role" />
+                <button @onclick="AddRole">Add Role</button>
+            </div>
+            <div class="flex flex-col justify-end gap-3 mt-6 sm:flex-row">
+                <button @onclick="CloseModal"
+                        class="px-6 py-2 rounded-sm shadow-sm bg-blue-400 text-gray-900 hover:bg-blue-300">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public bool ShowModal { get; set; }
+    [Parameter]
+    public EventCallback<bool> ModalClosed { get; set; }
+    [Parameter]
+    public required string UserId { get; set; }
+    [Parameter]
+    public string? UserName { get; set; }
+    private List<string> Roles { get; set; } = [];
+    private string newRole = string.Empty;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        Console.WriteLine("Modal is here!");
+        Console.WriteLine($"{UserName} // {UserId}");
+
+        if (ShowModal)
+        {
+            Roles = new List<string> { "Test" };
+        }
+    }
+
+    private async Task AddRole()
+    {
+        if (!string.IsNullOrWhiteSpace(newRole))
+        {
+            Roles.Add(newRole);
+            newRole = string.Empty;
+        }
+    }
+
+    private async Task RemoveRole(string role)
+    {
+        Roles.Remove(role);
+    }
+
+    private void CloseModal()
+    {
+        ShowModal = false;
+        ModalClosed.InvokeAsync(ShowModal);
+    }
+}

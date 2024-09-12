@@ -32,6 +32,10 @@ else
     </QuickGrid>
 }
 
+<UserRolesModal ShowModal="@showModal" 
+    UserId="@selectedUserId" UserName="@selectedUserName"
+    ModalClosed="CloseModal"/>
+
 @code {
     private List<UserResponse>? users = null;
     private bool showModal = false;
@@ -55,8 +59,8 @@ else
         Console.WriteLine($"Open Modal -> {selectedUserName} // {selectedUserId}");
     }
 
-    private void ToggleShowModal()
+    private void CloseModal()
     {
-        showModal = !showModal;
+        showModal = false;
     }
 }
