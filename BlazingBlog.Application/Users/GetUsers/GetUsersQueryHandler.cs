@@ -2,18 +2,18 @@
 
 namespace BlazingBlog.Application.Users.GetUsers
 {
-    internal class GetUserQueryHandler : IQueryHandler<GetUserQuery, List<UserResponse>>
+    internal class GetUsersQueryHandler : IQueryHandler<GetUsersQuery, List<UserResponse>>
     {
         private readonly IUserRepository _userRepository;
         private readonly IUserService _userService;
 
-        public GetUserQueryHandler(IUserRepository userRepository, IUserService userService)
+        public GetUsersQueryHandler(IUserRepository userRepository, IUserService userService)
         {
             _userRepository = userRepository;
             _userService = userService;
         }
 
-        public async Task<Result<List<UserResponse>>> Handle(GetUserQuery request,
+        public async Task<Result<List<UserResponse>>> Handle(GetUsersQuery request,
             CancellationToken cancellationToken)
         {
             if (!await _userService.IsCurrentUserInRoleAsync("Admin"))
@@ -22,7 +22,15 @@ namespace BlazingBlog.Application.Users.GetUsers
             }
 
             var users = await _userRepository.GetAllUsersAsync();
-            var response = users.Adapt<List<UserResponse>>();
+
+            var response = new List<UserResponse>();
+            foreach (var user in users)
+            {
+                var userResponse = user.Adapt<UserResponse>();
+                userResponse.Roles =
+                    string.Join(", ", await _userService.GetUserRolesAsync(user.Id));
+                response.Add(userResponse);
+            }
 
             return response;
         }

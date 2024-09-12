@@ -22,6 +22,7 @@ else
                         Sortable="true" Title="Name"></PropertyColumn>
         <PropertyColumn Property="@(u => u.Email)"
                         Sortable="true"></PropertyColumn>
+        <PropertyColumn Property="@(u => u.Roles)"></PropertyColumn>
     </QuickGrid>
 }
 
@@ -30,7 +31,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        var result = await Sender.Send(new GetUserQuery());
+        var result = await Sender.Send(new GetUsersQuery());
         if (result.Success)
             users = result;
         else

@@ -1,6 +1,6 @@
 ﻿namespace BlazingBlog.Application.Users.GetUsers
 {
-    public class GetUserQuery : IQuery<List<UserResponse>>
+    public class GetUsersQuery : IQuery<List<UserResponse>>
     {
     }
 }

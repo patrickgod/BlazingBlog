@@ -3,7 +3,8 @@
     public record struct UserResponse(
         string Id,
         string UserName,
-        string Email)
+        string Email,
+        string Roles)
     {
     }
 }
