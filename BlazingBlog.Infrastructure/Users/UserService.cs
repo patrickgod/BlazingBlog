@@ -115,6 +115,21 @@ namespace BlazingBlog.Infrastructure.Users
             return result;
         }
 
+        public async Task RemoveRoleFromUserAsync(string userId, string roleName)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user is null)
+            {
+                throw new Exception("User not found");
+            }
+
+            var result = await _userManager.RemoveFromRoleAsync(user, roleName);
+            if (!result.Succeeded)
+            {
+                throw new Exception("Failed to remove role from user.");
+            }
+        }
+
         private async Task<User?> GetCurrentUserAsync()
         {
             var httpContext = _httpContextAccessor.HttpContext;

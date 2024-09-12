@@ -1,4 +1,5 @@
-﻿@inject ISender Sender
+﻿@using BlazingBlog.Application.Users.RemoveRoleFromUser
+@inject ISender Sender
 
 @if (ShowModal)
 {
@@ -68,7 +69,12 @@
 
     private async Task RemoveRole(string role)
     {
-        Roles.Remove(role);
+        await Sender.Send(new RemoveRoleFromUserCommand
+            {
+                UserId = UserId,
+                RoleName = role
+            });
+        await LoadUserRoles();
     }
 
     private void CloseModal()
