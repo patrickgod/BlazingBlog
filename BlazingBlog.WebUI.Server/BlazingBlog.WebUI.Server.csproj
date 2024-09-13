@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BlazingBlog.Infrastructure\BlazingBlog.Infrastructure.csproj" />
+    <ProjectReference Include="..\BlazingBlog.WebUI.Client\BlazingBlog.WebUI.Client.csproj" />
   </ItemGroup>
 
   <ItemGroup>
