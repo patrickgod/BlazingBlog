@@ -1,6 +1,6 @@
 ﻿@page "/user-overview"
 @inject ISender Sender
-@rendermode InteractiveServer
+@rendermode @(new InteractiveServerRenderMode(false))
 @attribute [Authorize(Roles = "Admin")]
 
 <PageTitle>User Overview</PageTitle>
@@ -44,6 +44,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        await Task.Delay(1000);
         await LoadUsers();
     }
 
