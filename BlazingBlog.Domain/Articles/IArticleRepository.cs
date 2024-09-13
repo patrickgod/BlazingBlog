@@ -3,6 +3,7 @@
     public interface IArticleRepository
     {
         Task<List<Article>> GetAllArticlesAsync();
+        Task<List<Article>> GetArticlesByUserAsync(string userId);
         Task<Article?> GetArticleByIdAsync(int id);
         Task<Article> CreateArticleAsync(Article article);
         Task<Article?> UpdateArticleAsync(Article article);

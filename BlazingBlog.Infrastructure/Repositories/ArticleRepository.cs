@@ -44,6 +44,13 @@ namespace BlazingBlog.Infrastructure.Repositories
             return article;
         }
 
+        public async Task<List<Article>> GetArticlesByUserAsync(string userId)
+        {
+            return await _context.Articles
+                .Where(article => article.UserId == userId)
+                .ToListAsync();
+        }
+
         public async Task<Article?> UpdateArticleAsync(Article article)
         {
             var articleToUpdate = await GetArticleByIdAsync(article.Id);
