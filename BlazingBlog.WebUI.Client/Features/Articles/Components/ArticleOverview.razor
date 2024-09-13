@@ -1,10 +1,36 @@
 ﻿@page "/article-overview"
-@rendermode InteractiveWebAssembly
+@rendermode @(new InteractiveWebAssemblyRenderMode(false))
+@inject HttpClient Http
 
 <PageTitle>Article Overview</PageTitle>
 
 <h3>Article Overview</h3>
 
-@code {
+@if(articles is null)
+{
+    <span>Loading articles...</span>
+}
+else if(articles.Count == 0)
+{
+    <span>You have written not article, yet!</span>
+}
+else
+{
+    <ul>
+        @foreach (var article in articles)
+        {
+            <li>@article.Title</li>
+        }
+    </ul>
+}
 
+@code {
+    private List<ArticleResponse>? articles;
+
+    protected override async Task OnInitializedAsync()
+    {
+        articles = await Http.GetFromJsonAsync<List<ArticleResponse>>("/api/Articles");
+        if (articles is null)
+            articles = [];
+    }
 }
