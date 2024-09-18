@@ -1,11 +1,11 @@
 ﻿@page "/article-overview"
+@using Microsoft.AspNetCore.Authorization
 @rendermode @(new InteractiveAutoRenderMode(false))
-@inject HttpClient Http
+@inject IArticlesOverviewService ArticlesOverviewService
 @inject NavigationManager NavigationManager
+@attribute [Authorize]
 
-<PageTitle>Article Overview</PageTitle>
-
-<h2 class="text-3xl font-extrabold text-gray-50">Article Overview</h2>
+<h2 class="text-3xl font-extrabold text-gray-50">Articles Overview</h2>
 
 @if (articles is null)
 {
@@ -52,23 +52,20 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        articles = await Http.GetFromJsonAsync<List<ArticleResponse>>("/api/Articles");
+        articles = await ArticlesOverviewService.GetArticlesByCurrentUserAsync();
         if (articles is null)
             articles = [];
     }
 
     private async Task TogglePublishArticle(int id)
     {
-        var result = await Http.PatchAsync($"api/Articles/{id}", null);
-
-        if (result.IsSuccessStatusCode && articles is not null)
+        var updatedArticle = await ArticlesOverviewService.TogglePublishArticleAsync(id);
+        if (updatedArticle is not null && articles is not null)
         {
-            var updatedArticle = await result.Content.ReadFromJsonAsync<ArticleResponse>();
-
             var index = articles.FindIndex(a => a.Id == id);
             if (index != -1)
             {
-                articles[index] = updatedArticle;
+                articles[index] = (ArticleResponse)updatedArticle;
                 StateHasChanged();
             }
         }

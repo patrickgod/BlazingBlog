@@ -4,7 +4,7 @@ using MediatR;
 
 namespace BlazingBlog.Application.Articles
 {
-    internal class ArticlesOverviewService : IArticlesOverviewService
+    public class ArticlesOverviewService : IArticlesOverviewService
     {
         private readonly ISender _sender;
 

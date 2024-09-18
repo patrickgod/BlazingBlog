@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazingBlog.Application", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazingBlog.Infrastructure", "BlazingBlog.Infrastructure\BlazingBlog.Infrastructure.csproj", "{E7D6A4E1-D5E4-4436-98F2-35C425859A45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazingBlog.WebUI.Client", "BlazingBlog.WebUI.Client\BlazingBlog.WebUI.Client.csproj", "{D5E55B7E-05E4-447B-A0B9-4F36ADF6FED0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazingBlog.WebUI.Client", "BlazingBlog.WebUI.Client\BlazingBlog.WebUI.Client.csproj", "{D5E55B7E-05E4-447B-A0B9-4F36ADF6FED0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
