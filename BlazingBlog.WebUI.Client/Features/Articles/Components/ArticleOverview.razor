@@ -1,27 +1,43 @@
 ﻿@page "/article-overview"
 @rendermode @(new InteractiveWebAssemblyRenderMode(false))
 @inject HttpClient Http
+@inject NavigationManager NavigationManager
 
 <PageTitle>Article Overview</PageTitle>
 
-<h3>Article Overview</h3>
+<h2 class="text-3xl font-extrabold text-gray-50">Article Overview</h2>
 
-@if(articles is null)
+@if (articles is null)
 {
     <span>Loading articles...</span>
 }
-else if(articles.Count == 0)
+else if (articles.Count == 0)
 {
     <span>You have written not article, yet!</span>
 }
 else
 {
-    <ul>
-        @foreach (var article in articles)
-        {
-            <li>@article.Title</li>
-        }
-    </ul>
+    <QuickGrid Items="articles.AsQueryable()">
+        <PropertyColumn Property="@(a => a.Title)" Sortable="true"></PropertyColumn>
+        @* <PropertyColumn Property="@(a => a.IsPublished)" Title="Published" Sortable="true"></PropertyColumn> *@
+        <TemplateColumn Title="Published">
+            @if (context.IsPublished)
+            {
+                <span>✅</span>
+            }
+            else
+            {
+                <span>❌</span>
+            }
+        </TemplateColumn>
+        <PropertyColumn Property="@(a => a.DatePublished)" Title="Date Published" Sortable="true"></PropertyColumn>
+        <TemplateColumn>
+            <button @onclick="() => EditArticle(context.Id)"
+                    class="p-2 text-sm font-bold uppercase rounded bg-blue-400 text-gray-900 inline-block hover:bg-blue-300">
+                ✏️ Edit
+            </button>
+        </TemplateColumn>
+    </QuickGrid>
 }
 
 @code {
@@ -32,5 +48,10 @@ else
         articles = await Http.GetFromJsonAsync<List<ArticleResponse>>("/api/Articles");
         if (articles is null)
             articles = [];
+    }
+
+    private void EditArticle(int id)
+    {
+        NavigationManager.NavigateTo($"/article-editor/{id}");
     }
 }
