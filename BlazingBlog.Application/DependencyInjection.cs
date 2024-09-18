@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using BlazingBlog.Application.Articles;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BlazingBlog.Application
 {
@@ -10,6 +11,7 @@ namespace BlazingBlog.Application
             {
                 configuration.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
             });
+            services.AddScoped<IArticlesOverviewService, ArticlesOverviewService>();
 
             return services;
         }
