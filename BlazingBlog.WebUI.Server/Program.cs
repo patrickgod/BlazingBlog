@@ -1,7 +1,7 @@
 using BlazingBlog.Application;
-using BlazingBlog.Application.Articles;
 using BlazingBlog.Infrastructure;
 using BlazingBlog.WebUI.Server;
+using BlazingBlog.WebUI.Server.Features.Articles;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -42,16 +42,6 @@ app.MapRazorComponents<App>()
     .AddInteractiveWebAssemblyRenderMode()
     .AddAdditionalAssemblies(typeof(BlazingBlog.WebUI.Client._Imports).Assembly);
 
-app.MapGet("/api/articles", async (IArticlesOverviewService articlesOverviewService) =>
-{
-    var result = await articlesOverviewService.GetArticlesByCurrentUserAsync();
-    return Results.Ok(result);
-});
-
-app.MapPatch("/api/articles/{id:int}", async (int id, IArticlesOverviewService articlesOverviewService) =>
-{
-    var result = await articlesOverviewService.TogglePublishArticleAsync(id);
-    return result is null ? Results.BadRequest() : Results.Ok(result);
-});
+app.MapArticlesEndpoints();
 
 app.Run();
