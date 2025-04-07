@@ -1,10 +1,11 @@
 ﻿using BlazingBlog.Application.Articles;
+using Carter;
 
 namespace BlazingBlog.WebUI.Server.Features.Articles
 {
-    public static class ArticlesEndpoints
+    public class ArticlesEndpoints : ICarterModule
     {
-        public static IEndpointRouteBuilder MapArticlesEndpoints(this IEndpointRouteBuilder app)
+        public void AddRoutes(IEndpointRouteBuilder app)
         {
             var group = app.MapGroup("/api/articles").WithTags("Articles");
 
@@ -19,8 +20,6 @@ namespace BlazingBlog.WebUI.Server.Features.Articles
                 var result = await articlesOverviewService.TogglePublishArticleAsync(id);
                 return result is null ? Results.BadRequest() : Results.Ok(result);
             });
-
-            return app;
         }
     }
 }

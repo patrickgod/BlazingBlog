@@ -1,7 +1,7 @@
 using BlazingBlog.Application;
 using BlazingBlog.Infrastructure;
 using BlazingBlog.WebUI.Server;
-using BlazingBlog.WebUI.Server.Features.Articles;
+using Carter;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +16,8 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddControllers();
 
 builder.Services.AddOpenApi();
+
+builder.Services.AddCarter();
 
 var app = builder.Build();
 
@@ -42,6 +44,6 @@ app.MapRazorComponents<App>()
     .AddInteractiveWebAssemblyRenderMode()
     .AddAdditionalAssemblies(typeof(BlazingBlog.WebUI.Client._Imports).Assembly);
 
-app.MapArticlesEndpoints();
+app.MapCarter();
 
 app.Run();
