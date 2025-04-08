@@ -1,6 +1,5 @@
 ﻿using BlazingBlog.Application.Articles.GetArticlesByCurrentUser;
 using BlazingBlog.Application.Articles.TogglePublishArticle;
-using MediatR;
 
 namespace BlazingBlog.Application.Articles
 {
