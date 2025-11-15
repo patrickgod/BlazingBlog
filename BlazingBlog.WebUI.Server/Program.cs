@@ -36,8 +36,10 @@ app.UseHttpsRedirection();
 
 //app.MapControllers();
 
-app.UseStaticFiles();
+//app.UseStaticFiles();
 app.UseAntiforgery();
+
+app.MapStaticAssets();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()
